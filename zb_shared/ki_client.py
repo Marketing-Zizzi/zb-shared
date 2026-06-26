@@ -150,6 +150,17 @@ def embed_query(text: str) -> list[float]:
     return embed_batch_sync([text], kind="query")[0]
 
 
+async def embed_query_async(text: str) -> list[float]:
+    """Async-Einzel-Query-Embedding (768 Dim, EU). Identischer Vektor-Raum wie embed_query."""
+    return (await embed_batch_async([text], kind="query"))[0]
+
+
+def gcp_credentials():
+    """Refreshte GCP-Service-Account-Credentials (mit .token) fuer Apps, die selbst Vertex-REST-Calls
+    bauen (z. B. vertex_gemini). Ersetzt das fruehere per-App vertex_embeddings._get_credentials()."""
+    return _vertex_credentials()
+
+
 # ── Claude-Client: direct (US) oder Vertex (EU) ──────────────────────────────
 def get_anthropic_async():
     """AsyncAnthropic (direct) ODER AsyncAnthropicVertex (EU) je ANTHROPIC_BACKEND.

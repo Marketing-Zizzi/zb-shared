@@ -1,6 +1,6 @@
 [project]
 name = "zb-shared"
-version = "0.2.1"
+version = "0.2.2"
 description = "Geteilte Bibliotheken fuer Zitzelsberger-Apps (kanonischer KI-Client + Audit-Libs: mailer, pdf). Konsolidierung P2.2/P2.3, [d-303]."
 requires-python = ">=3.10"
 dependencies = [
