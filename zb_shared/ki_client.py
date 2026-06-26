@@ -27,7 +27,9 @@ EMBED_LOCATION = os.getenv("VERTEX_EMBED_LOCATION", "europe-west3")
 CLAUDE_LOCATION = os.getenv("VERTEX_CLAUDE_LOCATION", "europe-west1")
 ANTHROPIC_BACKEND = os.getenv("ANTHROPIC_BACKEND", "direct").strip().lower()
 CLAUDE_MODEL_DIRECT = os.getenv("ANTHROPIC_MODEL", "claude-sonnet-4-6")
-CLAUDE_MODEL_VERTEX = os.getenv("ANTHROPIC_MODEL_VERTEX", "claude-sonnet-4-6@20250929")
+# EU-Default: in europe-west1 ist (Stand 2026-06-26) als aktuelles Claude NUR
+# claude-sonnet-4-5@20250929 verfuegbar (sonnet-4-6 existiert dort NICHT -> 404). [L-356]
+CLAUDE_MODEL_VERTEX = os.getenv("ANTHROPIC_MODEL_VERTEX", "claude-sonnet-4-5@20250929")
 
 
 def claude_model() -> str:
@@ -161,7 +163,7 @@ def get_anthropic_async():
             if not ensure_gcp_creds():
                 return None
             from anthropic import AsyncAnthropicVertex
-            return AsyncAnthropicVertex(region=CLAUDE_LOCATION)
+            return AsyncAnthropicVertex(region=CLAUDE_LOCATION, project_id=_vertex_credentials().project_id)
         key = os.getenv("ANTHROPIC_API_KEY")
         if not key:
             return None
@@ -181,7 +183,7 @@ def get_anthropic_sync():
             if not ensure_gcp_creds():
                 return None
             from anthropic import AnthropicVertex
-            return AnthropicVertex(region=CLAUDE_LOCATION)
+            return AnthropicVertex(region=CLAUDE_LOCATION, project_id=_vertex_credentials().project_id)
         key = os.getenv("ANTHROPIC_API_KEY")
         if not key:
             return None

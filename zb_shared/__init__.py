@@ -11,4 +11,4 @@ Module:
     pdf        — duenne PDF-/HTML-Helfer (escape_html, format_date_de, logo_data_uri, html_to_pdf_bytes)
     (geplant)  — weitere Audit-Libs nach Bedarf (vision liegt bereits in ki_client.claude_model)
 """
-__version__ = "0.2.0"
+__version__ = "0.2.1"
